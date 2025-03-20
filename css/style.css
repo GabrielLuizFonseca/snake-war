@@ -32,6 +32,18 @@ canvas{
     display: block;
     margin-top: -10px;
 }
+.hidden {
+    display: none;
+}
+
+#mobileMessage {
+    text-align: center;
+    font-size: 16px;
+    color: #f00;
+    margin-top: 10px;
+}
+
+
 .menu-screen{
     position: absolute;
     display: none;

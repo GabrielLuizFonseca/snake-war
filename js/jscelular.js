@@ -16,8 +16,6 @@ let snake = [initialPosition];
 let touchStartX = 0;
 let touchStartY = 0;
 
-// Funções do jogo (como drawFood, drawSnake, etc.)
-
 // Adicionando os eventos de toque corretamente
 
 const handleTouchStart = (e) => {
@@ -84,6 +82,8 @@ document.addEventListener("keydown", ({ key }) => {
 // Adicionando o controle por toque
 canvas.addEventListener("touchstart", handleTouchStart);
 canvas.addEventListener("touchmove", handleTouchMove);
+
+// Funções do jogo (como drawFood, drawSnake, etc.)
 
 const incrementScore = () => {
     score.innerText = + score.innerText + 10
@@ -244,3 +244,16 @@ buttonPlay.addEventListener("click", () => {
 
     snake = [initialPosition];
 });
+const mobileMessage = document.getElementById("mobileMessage");
+
+const checkScreenSize = () => {
+    if (window.innerWidth < 420) {
+        mobileMessage.classList.remove("hidden"); // Exibe a mensagem
+    } else {
+        mobileMessage.classList.add("hidden"); // Esconde a mensagem
+    }
+};
+
+// Verificar a tela ao carregar e quando houver redimensionamento
+window.addEventListener("load", checkScreenSize);
+window.addEventListener("resize", checkScreenSize);
