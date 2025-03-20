@@ -7,6 +7,48 @@ const finalScore = document.querySelector(".final-score > span")
 const menu = document.querySelector(".menu-screen")
 const buttonPlay = document.querySelector(".btn-play")
 
+// para celular
+let touchStartX = 0
+let touchStartY = 0
+
+const handleTouchStart = (e) => {
+    const touch = e.touches[0]
+    touchStartX = touch.clientX
+    touchStartY = touch.clientY
+}
+
+const handleTouchMove = (e) => {
+    if (!touchStartX || !touchStartY) return // Se o toque inicial não foi detectado, ignoramos o movimento.
+
+    const touch = e.touches[0]
+    const deltaX = touch.clientX - touchStartX
+    const deltaY = touch.clientY - touchStartY
+
+    // Verifica a direção do movimento do toque
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Movimento horizontal
+        if (deltaX > 0 && direction !== "left") {
+            direction = "right"
+        } else if (deltaX < 0 && direction !== "right") {
+            direction = "left"
+        }
+    } else {
+        // Movimento vertical
+        if (deltaY > 0 && direction !== "up") {
+            direction = "down"
+        } else if (deltaY < 0 && direction !== "down") {
+            direction = "up"
+        }
+    }
+
+    // Atualiza a posição inicial para o próximo toque
+    touchStartX = touch.clientX
+    touchStartY = touch.clientY
+}
+canvas.addEventListener("touchstart", handleTouchStart)
+canvas.addEventListener("touchmove", handleTouchMove)
+
+//codigo para teclado
 const size = 30
 const initialPosition = {x: 270, y: 240}
 let snake = [initialPosition]
